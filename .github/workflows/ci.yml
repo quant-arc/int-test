@@ -1,0 +1,26 @@
+name: Daily Ecosystem Boost
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    # Runs automatically every day at 3:00 AM UTC (4:00 AM Lagos time)
+    - cron: '0 3 * * *'
+
+jobs:
+  boost:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Make script executable
+        run: chmod +x boost.sh
+        
+      - name: Run Daily Boost Script
+        run: ./boost.sh
